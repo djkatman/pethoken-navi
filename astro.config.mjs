@@ -4,6 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://pethoken-navi.djkatman.workers.dev',
+  site: 'https://pethoken-navi.com',
   integrations: [sitemap()],
 });
