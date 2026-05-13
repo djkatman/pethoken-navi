@@ -1,11 +1,313 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const rankings = [
+  {
+    rank: 1,
+    name: 'アニコム損保 どうぶつ健保',
+    badge: '総合No.1',
+    monthlyFee: '2,310円〜',
+    coverage: '70%補償',
+    point: '全国9,000院以上でキャッシュレス受診',
+    recommended: '幅広い年齢のペットにおすすめ',
+    url: '#',
+  },
+  {
+    rank: 2,
+    name: 'ペット&ファミリー SBI',
+    badge: '保険料お手頃',
+    monthlyFee: '1,980円〜',
+    coverage: '70%補償',
+    point: '通院・入院・手術すべてカバー',
+    recommended: 'コスパ重視の方におすすめ',
+    url: '#',
+  },
+  {
+    rank: 3,
+    name: 'アイペット損保 うちの子',
+    badge: '補償充実',
+    monthlyFee: '3,020円〜',
+    coverage: '90%補償',
+    point: '高額治療もしっかりカバー',
+    recommended: '手厚い補償を求める方におすすめ',
+    url: '#',
+  },
+];
+
+const features = [
+  { icon: '📊', title: '最新の保険料を比較', desc: '主要ペット保険の保険料・補償内容を一覧で比較。最新情報を随時更新しています。' },
+  { icon: '🏆', title: '専門家監修のランキング', desc: '獣医師・ファイナンシャルプランナーの監修のもと、公正なランキングを作成しています。' },
+  { icon: '💬', title: 'リアルな口コミを掲載', desc: '実際に加入したオーナーの口コミ・評判を掲載。リアルな声を参考にできます。' },
+];
+
+const faqs = [
+  { q: 'ペット保険はいつから加入できますか？', a: '多くの保険会社では生後45日〜2ヶ月から加入可能です。ただし年齢上限（7〜12歳）を設けている商品も多いため、早めの加入がおすすめです。' },
+  { q: '保険料は月いくらくらいかかりますか？', a: '犬・猫の年齢・犬種・補償内容によって異なりますが、月額1,500円〜5,000円程度が一般的です。当サイトの比較表でご確認ください。' },
+  { q: '既往症があっても加入できますか？', a: '既往症（持病）は原則として補償対象外になります。ただし商品によって条件が異なるため、加入前に必ず保険会社に確認してください。' },
+  { q: 'キャッシュレス診療とは何ですか？', a: '動物病院での支払い時に、窓口で保険会社へ直接請求できる仕組みです。アニコム損保などが対応しており、一時的な高額支払いを避けられます。' },
+  { q: 'ペット保険に加入しないとどうなりますか？', a: 'ペットの医療費は全額自己負担となります。犬・猫の手術費用は平均15〜30万円かかるケースもあり、保険への加入で家計へのダメージを軽減できます。' },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="ペット保険ナビ｜犬・猫のペット保険比較・ランキング2026年最新版"
+  description="犬・猫のペット保険を徹底比較。保険料・補償内容・口コミをわかりやすくランキング形式で紹介。2026年最新の人気保険をすぐに比較できます。"
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="hero-sub">獣医師監修・2026年最新版</p>
+        <h1 class="hero-title">愛するペットに<br />最適な保険を選ぼう</h1>
+        <p class="hero-desc">犬・猫のペット保険を保険料・補償内容・口コミで徹底比較。<br />あなたのペットに最適な1本がすぐに見つかります。</p>
+        <div class="hero-cta">
+          <a href="/ranking/" class="btn btn-primary">人気ランキングを見る</a>
+          <a href="/compare/" class="btn btn-outline">保険料を比較する</a>
+        </div>
+      </div>
+      <div class="hero-img" aria-hidden="true">🐕🐈</div>
+    </div>
+  </section>
+
+  <!-- Ranking Section -->
+  <section class="section ranking-section">
+    <div class="container">
+      <h2 class="section-title">人気ペット保険ランキング</h2>
+      <p class="section-sub">※本コンテンツはアフィリエイト広告を含みます。ランキングは編集部の独自基準に基づきます。</p>
+      <div class="ranking-list">
+        {rankings.map((item) => (
+          <div class={`ranking-card rank-${item.rank}`}>
+            <div class="rank-badge">
+              <span class="rank-num">{item.rank}位</span>
+              <span class="rank-label">{item.badge}</span>
+            </div>
+            <div class="rank-body">
+              <h3 class="rank-name">{item.name}</h3>
+              <ul class="rank-meta">
+                <li><span class="meta-label">月額保険料</span><span class="meta-val">{item.monthlyFee}</span></li>
+                <li><span class="meta-label">補償割合</span><span class="meta-val">{item.coverage}</span></li>
+                <li><span class="meta-label">特徴</span><span class="meta-val">{item.point}</span></li>
+              </ul>
+              <p class="rank-recommend">{item.recommended}</p>
+            </div>
+            <div class="rank-action">
+              <a href={item.url} rel="sponsored" class="btn btn-primary rank-cta">公式サイトで確認</a>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="ranking-more">
+        <a href="/ranking/" class="btn btn-outline">ランキング全件を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section features-section">
+    <div class="container">
+      <h2 class="section-title">このサイトでわかること</h2>
+      <p class="section-sub">ペット保険選びに必要な情報を、わかりやすくまとめました。</p>
+      <div class="features-grid">
+        {features.map((f) => (
+          <div class="feature-card">
+            <div class="feature-icon">{f.icon}</div>
+            <h3 class="feature-title">{f.title}</h3>
+            <p class="feature-desc">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section faq-section">
+    <div class="container">
+      <h2 class="section-title">よくある質問</h2>
+      <p class="section-sub">ペット保険に関するよくある疑問にお答えします。</p>
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <details class="faq-item">
+            <summary class="faq-q">
+              <span class="faq-q-icon">Q</span>{faq.q}
+            </summary>
+            <div class="faq-a">
+              <span class="faq-a-icon">A</span>
+              <p>{faq.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+      <div style="text-align:center;margin-top:1.5rem;">
+        <a href="/faq/" class="btn btn-outline">FAQ一覧を見る</a>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "ペット保険ナビ",
+  "url": "https://pethoken-navi.djkatman.workers.dev",
+  "description": "犬・猫のペット保険を徹底比較。保険料・補償内容・口コミをわかりやすくランキング形式で紹介。"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question","name": "ペット保険はいつから加入できますか？","acceptedAnswer": {"@type": "Answer","text": "多くの保険会社では生後45日〜2ヶ月から加入可能です。年齢上限を設けている商品も多いため、早めの加入がおすすめです。"}},
+    {"@type": "Question","name": "保険料は月いくらくらいかかりますか？","acceptedAnswer": {"@type": "Answer","text": "犬・猫の年齢・犬種・補償内容によって異なりますが、月額1,500円〜5,000円程度が一般的です。"}},
+    {"@type": "Question","name": "既往症があっても加入できますか？","acceptedAnswer": {"@type": "Answer","text": "既往症（持病）は原則として補償対象外になります。加入前に必ず保険会社に確認してください。"}}
+  ]
+}
+</script>
+
+<style>
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #e8f5ee 0%, #fff8e8 100%);
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .hero-text { flex: 1; }
+  .hero-sub {
+    display: inline-block;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 700;
+    padding: .25rem .75rem;
+    border-radius: 999px;
+    margin-bottom: .75rem;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+  .hero-desc { color: var(--color-text-light); margin-bottom: 1.75rem; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .hero-img { font-size: 5rem; flex-shrink: 0; }
+
+  /* Section */
+  .section { padding: 4rem 0; }
+
+  /* Ranking */
+  .ranking-section { background: var(--color-white); }
+  .ranking-list { display: flex; flex-direction: column; gap: 1.25rem; }
+  .ranking-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: #fff;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow .2s;
+  }
+  .ranking-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.12); }
+  .ranking-card.rank-1 { border-color: #f5c842; }
+  .ranking-card.rank-2 { border-color: #b0bec5; }
+  .ranking-card.rank-3 { border-color: #d7a97a; }
+  .rank-badge { text-align: center; flex-shrink: 0; width: 70px; }
+  .rank-num { display: block; font-size: 1.6rem; font-weight: 700; color: var(--color-primary); }
+  .rank-label { display: block; font-size: .7rem; background: var(--color-accent); color: #fff; border-radius: 999px; padding: .15rem .5rem; margin-top: .25rem; }
+  .rank-body { flex: 1; }
+  .rank-name { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
+  .rank-meta { display: flex; flex-wrap: wrap; gap: .25rem .75rem; margin-bottom: .5rem; }
+  .rank-meta li { font-size: .85rem; }
+  .meta-label { color: var(--color-text-light); margin-right: .25rem; }
+  .meta-val { font-weight: 500; }
+  .rank-recommend { font-size: .82rem; color: var(--color-primary); font-weight: 500; }
+  .rank-action { flex-shrink: 0; }
+  .rank-cta { white-space: nowrap; font-size: .9rem; padding: .7rem 1.25rem; }
+  .ranking-more { text-align: center; margin-top: 2rem; }
+
+  /* Features */
+  .features-section { background: var(--color-bg); }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .feature-card {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .feature-icon { font-size: 2.5rem; margin-bottom: .75rem; }
+  .feature-title { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; color: var(--color-primary); }
+  .feature-desc { font-size: .88rem; color: var(--color-text-light); }
+
+  /* FAQ */
+  .faq-section { background: var(--color-white); }
+  .faq-list { display: flex; flex-direction: column; gap: .75rem; }
+  .faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .faq-q {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: 1rem 1.25rem;
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+    background: #f9fafb;
+  }
+  .faq-q:hover { background: #eef7f2; }
+  .faq-q-icon {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: .85rem;
+  }
+  .faq-a {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border-top: 1px solid var(--color-border);
+  }
+  .faq-a-icon {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: .85rem;
+  }
+  .faq-a p { font-size: .92rem; color: var(--color-text-light); line-height: 1.7; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-inner { flex-direction: column; text-align: center; }
+    .hero-title { font-size: 1.6rem; }
+    .hero-cta { justify-content: center; }
+    .hero-img { font-size: 3rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .ranking-card { flex-direction: column; align-items: flex-start; }
+    .rank-badge { display: flex; align-items: center; gap: .5rem; width: auto; }
+    .rank-action { width: 100%; }
+    .rank-cta { width: 100%; }
+  }
+</style>

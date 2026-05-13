@@ -1,23 +1,320 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'ペット保険ナビ｜犬・猫のペット保険比較・ランキング2026',
+  description = '犬・猫のペット保険を徹底比較。保険料・補償内容・口コミをわかりやすくランキング形式で紹介。あなたの大切なペットに最適な保険が見つかります。',
+  canonical = Astro.url.href,
+  ogImage = '/og-image.png',
+} = Astro.props;
+
+const siteUrl = 'https://pethoken-navi.djkatman.workers.dev';
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="ペット保険ナビ" />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:locale" content="ja_JP" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+    <!-- Google Fonts: Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- 広告表記 -->
+    <div class="pr-notice">本サイトはアフィリエイト広告（プロモーション）を含みます</div>
+
+    <!-- ヘッダー -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="/" class="site-logo">
+          <span class="logo-icon">🐾</span>
+          <span class="logo-text">ペット保険ナビ</span>
+        </a>
+        <nav class="global-nav" aria-label="グローバルナビゲーション">
+          <ul>
+            <li><a href="/">トップ</a></li>
+            <li><a href="/dog/">犬の保険</a></li>
+            <li><a href="/cat/">猫の保険</a></li>
+            <li><a href="/ranking/">ランキング</a></li>
+            <li><a href="/faq/">よくある質問</a></li>
+          </ul>
+        </nav>
+        <button class="nav-toggle" aria-label="メニューを開く" id="navToggle">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <p class="footer-logo">🐾 ペット保険ナビ</p>
+          <p class="footer-tagline">大切なペットのために、最適な保険を。</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <ul>
+            <li><a href="/privacy-policy/">プライバシーポリシー</a></li>
+            <li><a href="/disclaimer/">免責事項</a></li>
+            <li><a href="/about/">サイトについて</a></li>
+            <li><a href="/contact/">お問い合わせ</a></li>
+          </ul>
+        </nav>
+        <div class="footer-affiliate-notice">
+          <p>当サイトはアフィリエイトプログラムに参加しており、掲載商品への申込みを通じて報酬を得ることがあります。掲載内容は公正・中立を保つよう努めています。</p>
+        </div>
+        <p class="footer-copyright">&copy; 2026 ペット保険ナビ All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById('navToggle');
+      const nav = document.querySelector('.global-nav');
+      toggle?.addEventListener('click', () => {
+        nav?.classList.toggle('is-open');
+      });
+    </script>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  /* ===== Reset ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  img, svg { display: block; max-width: 100%; }
+  ul { list-style: none; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== Design Tokens ===== */
+  :root {
+    --color-primary: #2B7A4B;
+    --color-primary-dark: #1f5c38;
+    --color-accent: #F5A623;
+    --color-accent-dark: #d4881a;
+    --color-text: #1a1a1a;
+    --color-text-light: #555;
+    --color-bg: #f9fafb;
+    --color-white: #fff;
+    --color-border: #e5e7eb;
+    --font-base: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    --max-width: 1100px;
+    --radius: 8px;
+    --shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+
+  /* ===== Base ===== */
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-base);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.7;
+  }
+
+  /* ===== PR Notice ===== */
+  .pr-notice {
+    background: #fff8e1;
+    border-bottom: 1px solid #ffe082;
+    text-align: center;
+    font-size: .75rem;
+    padding: .35rem 1rem;
+    color: #7a6000;
+  }
+
+  /* ===== Header ===== */
+  .site-header {
+    background: var(--color-white);
+    border-bottom: 3px solid var(--color-primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  }
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: .75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .site-logo {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    white-space: nowrap;
+  }
+  .logo-icon { font-size: 1.5rem; }
+  .global-nav { margin-left: auto; }
+  .global-nav ul {
+    display: flex;
+    gap: .25rem;
+  }
+  .global-nav a {
+    display: block;
+    padding: .45rem .85rem;
+    border-radius: var(--radius);
+    font-size: .9rem;
+    font-weight: 500;
+    transition: background .2s, color .2s;
+  }
+  .global-nav a:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: .5rem;
+    margin-left: auto;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 2px;
+  }
+
+  /* ===== Main ===== */
+  main { min-height: 60vh; }
+
+  /* ===== Footer ===== */
+  .site-footer {
+    background: #1a1a2e;
+    color: #ccc;
+    padding: 2.5rem 1.25rem 1.5rem;
+    margin-top: 4rem;
+  }
+  .footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .footer-logo { font-size: 1.1rem; font-weight: 700; color: #fff; }
+  .footer-tagline { font-size: .85rem; color: #aaa; margin-top: .25rem; }
+  .footer-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.5rem;
+  }
+  .footer-nav a {
+    font-size: .85rem;
+    color: #aaa;
+    transition: color .2s;
+  }
+  .footer-nav a:hover { color: #fff; }
+  .footer-affiliate-notice {
+    border-top: 1px solid #333;
+    padding-top: 1rem;
+    font-size: .78rem;
+    color: #888;
+    line-height: 1.6;
+  }
+  .footer-copyright {
+    font-size: .78rem;
+    color: #666;
+    text-align: center;
+  }
+
+  /* ===== Utilities ===== */
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.25rem; }
+  .btn {
+    display: inline-block;
+    padding: .85rem 2rem;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background .2s, transform .1s;
+    text-align: center;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--color-accent); color: var(--color-white); }
+  .btn-primary:hover { background: var(--color-accent-dark); }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+  }
+  .btn-outline:hover { background: var(--color-primary); color: var(--color-white); }
+
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: .5rem;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+    font-size: .95rem;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .nav-toggle { display: flex; }
+    .global-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-white);
+      border-top: 1px solid var(--color-border);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow);
+    }
+    .global-nav.is-open { display: block; }
+    .global-nav ul { flex-direction: column; gap: .25rem; }
+    .site-header { position: relative; }
+  }
 </style>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pethoken-navi.djkatman.workers.dev/sitemap-index.xml
