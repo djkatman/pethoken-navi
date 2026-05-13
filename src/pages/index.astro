@@ -35,9 +35,9 @@ const rankings = [
 ];
 
 const features = [
-  { icon: '📊', title: '最新の保険料を比較', desc: '主要ペット保険の保険料・補償内容を一覧で比較。最新情報を随時更新しています。' },
-  { icon: '🏆', title: '専門家監修のランキング', desc: '獣医師・ファイナンシャルプランナーの監修のもと、公正なランキングを作成しています。' },
-  { icon: '💬', title: 'リアルな口コミを掲載', desc: '実際に加入したオーナーの口コミ・評判を掲載。リアルな声を参考にできます。' },
+  { img: '/images/feature-compare.jpg', alt: '保険料の比較表を確認する飼い主', title: '最新の保険料を比較', desc: '主要ペット保険の保険料・補償内容を一覧で比較。最新情報を随時更新しています。' },
+  { img: '/images/feature-vet.jpg', alt: '獣医師による診察シーン', title: '専門家監修のランキング', desc: '獣医師・ファイナンシャルプランナーの監修のもと、公正なランキングを作成しています。' },
+  { img: '/images/feature-review.jpg', alt: 'スマホで口コミを確認する飼い主', title: 'リアルな口コミを掲載', desc: '実際に加入したオーナーの口コミ・評判を掲載。リアルな声を参考にできます。' },
 ];
 
 const faqs = [
@@ -65,7 +65,16 @@ const faqs = [
           <a href="/compare/" class="btn btn-outline">保険料を比較する</a>
         </div>
       </div>
-      <div class="hero-img" aria-hidden="true">🐕🐈</div>
+      <div class="hero-img">
+        <img
+          src="/images/hero-pet.jpg"
+          alt="犬と猫と笑顔の飼い主"
+          width="520"
+          height="380"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
     </div>
   </section>
 
@@ -110,7 +119,9 @@ const faqs = [
       <div class="features-grid">
         {features.map((f) => (
           <div class="feature-card">
-            <div class="feature-icon">{f.icon}</div>
+            <div class="feature-img-wrap">
+              <img src={f.img} alt={f.alt} width="360" height="200" loading="lazy" decoding="async" />
+            </div>
             <h3 class="feature-title">{f.title}</h3>
             <p class="feature-desc">{f.desc}</p>
           </div>
@@ -198,7 +209,19 @@ const faqs = [
   }
   .hero-desc { color: var(--color-text-light); margin-bottom: 1.75rem; }
   .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .hero-img { font-size: 5rem; flex-shrink: 0; }
+  .hero-img {
+    flex-shrink: 0;
+    width: 420px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,.15);
+  }
+  .hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
   /* Section */
   .section { padding: 4rem 0; }
@@ -245,7 +268,20 @@ const faqs = [
     text-align: center;
     box-shadow: var(--shadow);
   }
-  .feature-icon { font-size: 2.5rem; margin-bottom: .75rem; }
+  .feature-img-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: var(--radius) var(--radius) 0 0;
+    margin: -1.75rem -1.25rem 1rem;
+    width: calc(100% + 2.5rem);
+  }
+  .feature-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
   .feature-title { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; color: var(--color-primary); }
   .feature-desc { font-size: .88rem; color: var(--color-text-light); }
 
@@ -303,7 +339,7 @@ const faqs = [
     .hero-inner { flex-direction: column; text-align: center; }
     .hero-title { font-size: 1.6rem; }
     .hero-cta { justify-content: center; }
-    .hero-img { font-size: 3rem; }
+    .hero-img { width: 100%; max-width: 360px; margin: 0 auto; }
     .features-grid { grid-template-columns: 1fr; }
     .ranking-card { flex-direction: column; align-items: flex-start; }
     .rank-badge { display: flex; align-items: center; gap: .5rem; width: auto; }
