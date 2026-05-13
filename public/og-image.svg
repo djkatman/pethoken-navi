@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2B7A4B"/>
+      <stop offset="100%" stop-color="#1f5c38"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative circle accent top-right -->
+  <circle cx="1100" cy="80" r="200" fill="#ffffff" fill-opacity="0.04"/>
+  <circle cx="1150" cy="550" r="140" fill="#F5A623" fill-opacity="0.12"/>
+
+  <!-- Paw print motif (left side, large) -->
+  <!-- Main pad -->
+  <ellipse cx="290" cy="370" rx="100" ry="85" fill="#ffffff" fill-opacity="0.15"/>
+  <!-- Top-left toe -->
+  <ellipse cx="155" cy="230" rx="48" ry="38" fill="#ffffff" fill-opacity="0.15"/>
+  <!-- Top-center-left toe -->
+  <ellipse cx="240" cy="190" rx="48" ry="38" fill="#ffffff" fill-opacity="0.15"/>
+  <!-- Top-center-right toe -->
+  <ellipse cx="340" cy="190" rx="48" ry="38" fill="#ffffff" fill-opacity="0.15"/>
+  <!-- Top-right toe -->
+  <ellipse cx="425" cy="230" rx="48" ry="38" fill="#ffffff" fill-opacity="0.15"/>
+
+  <!-- Accent line -->
+  <rect x="560" y="160" width="4" height="310" fill="#F5A623" opacity="0.6"/>
+
+  <!-- Site name -->
+  <text x="600" y="280" font-family="sans-serif" font-weight="700" font-size="96" fill="#ffffff" dominant-baseline="middle">ペット保険ナビ</text>
+
+  <!-- Sub text -->
+  <text x="600" y="380" font-family="sans-serif" font-weight="400" font-size="42" fill="#F5A623" dominant-baseline="middle">犬・猫のペット保険を徹底比較</text>
+
+  <!-- Divider -->
+  <rect x="600" y="440" width="520" height="3" fill="#ffffff" opacity="0.3"/>
+
+  <!-- URL -->
+  <text x="600" y="490" font-family="sans-serif" font-weight="400" font-size="32" fill="#ffffff" fill-opacity="0.7" dominant-baseline="middle">pethoken-navi.com</text>
+</svg>
