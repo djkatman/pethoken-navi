@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="お問い合わせ｜ペット保険ナビ"
+  description="ペット保険ナビへのお問い合わせはこちらからどうぞ。"
+>
+  <div class="container page-wrap">
+    <h1 class="page-title">お問い合わせ</h1>
+    <p class="page-desc">記事内容の誤りや広告に関するご連絡など、お気軽にお問い合わせください。<br />内容を確認のうえ、数日以内にご返信いたします。</p>
+
+    <form class="contact-form" id="contactForm">
+      <div class="field">
+        <label for="name">お名前 <span class="required">必須</span></label>
+        <input type="text" id="name" name="name" required placeholder="例：田中 太郎" />
+      </div>
+
+      <div class="field">
+        <label for="email">メールアドレス <span class="required">必須</span></label>
+        <input type="email" id="email" name="email" required placeholder="例：example@email.com" />
+      </div>
+
+      <div class="field">
+        <label for="type">お問い合わせ種別 <span class="required">必須</span></label>
+        <select id="type" name="type" required>
+          <option value="">選択してください</option>
+          <option value="article">記事内容の誤り</option>
+          <option value="ad">広告・アフィリエイトに関して</option>
+          <option value="other">その他</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message">お問い合わせ内容 <span class="required">必須</span></label>
+        <textarea id="message" name="message" required rows="6" placeholder="お問い合わせ内容をご記入ください"></textarea>
+      </div>
+
+      <div class="field field-check">
+        <label class="check-label">
+          <input type="checkbox" id="privacy" name="privacy" required />
+          <span><a href="/privacy-policy/" target="_blank">プライバシーポリシー</a>に同意する</span>
+        </label>
+      </div>
+
+      <div id="formMsg" class="form-msg" aria-live="polite"></div>
+
+      <button type="submit" class="btn btn-primary submit-btn">送信する</button>
+    </form>
+  </div>
+</Layout>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  const msg = document.getElementById('formMsg') as HTMLElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    btn.disabled = true;
+    btn.textContent = '送信中...';
+    msg.textContent = '';
+    msg.className = 'form-msg';
+
+    const data = {
+      name: (form.elements.namedItem('name') as HTMLInputElement).value,
+      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+      type: (form.elements.namedItem('type') as HTMLSelectElement).value,
+      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch('https://contact.pethoken-navi.com/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        msg.textContent = 'お問い合わせを受け付けました。数日以内にご返信いたします。';
+        msg.classList.add('success');
+        form.reset();
+      } else {
+        throw new Error('送信失敗');
+      }
+    } catch {
+      msg.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+      msg.classList.add('error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '送信する';
+    }
+  });
+</script>
+
+<style>
+  .page-wrap {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+    max-width: 680px;
+  }
+  .page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: .75rem;
+  }
+  .page-desc {
+    font-size: .95rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+  .field { display: flex; flex-direction: column; gap: .4rem; }
+  .field label {
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .required {
+    display: inline-block;
+    background: #e53e3e;
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 700;
+    padding: .1rem .4rem;
+    border-radius: 3px;
+    margin-left: .4rem;
+    vertical-align: middle;
+  }
+  .field input[type="text"],
+  .field input[type="email"],
+  .field select,
+  .field textarea {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: .7rem 1rem;
+    font-size: .95rem;
+    font-family: var(--font-base);
+    color: var(--color-text);
+    background: #fff;
+    transition: border-color .2s;
+    width: 100%;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(43,122,75,.15);
+  }
+  .field textarea { resize: vertical; }
+  .field-check { flex-direction: row; align-items: flex-start; }
+  .check-label {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: .9rem;
+    font-weight: 400;
+    cursor: pointer;
+  }
+  .check-label a { color: var(--color-primary); text-decoration: underline; }
+  .submit-btn { align-self: flex-start; min-width: 160px; }
+  .form-msg {
+    font-size: .9rem;
+    padding: .75rem 1rem;
+    border-radius: var(--radius);
+    display: none;
+  }
+  .form-msg.success { display: block; background: #e8f5ee; color: #1f5c38; }
+  .form-msg.error { display: block; background: #fef2f2; color: #c53030; }
+</style>

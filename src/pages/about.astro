@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="運営者情報｜ペット保険ナビ"
+  description="ペット保険ナビの運営者情報です。"
+>
+  <div class="container page-wrap">
+    <h1 class="page-title">運営者情報</h1>
+    <p class="page-updated">最終更新日：2026年5月13日</p>
+
+    <section class="section-block">
+      <h2>サイト運営者</h2>
+      <table class="info-table">
+        <tbody>
+          <tr><th>サイト名</th><td>ペット保険ナビ</td></tr>
+          <tr><th>運営者名</th><td>中澤一人</td></tr>
+          <tr><th>所在地</th><td>沖縄県那覇市具志2-28-35</td></tr>
+          <tr><th>お問い合わせ</th><td><a href="/contact/">お問い合わせフォーム</a>よりご連絡ください</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section-block">
+      <h2>特定商取引法に基づく表示</h2>
+      <p>当サイトはアフィリエイトメディアであり、物品・役務の直接販売は行っておりません。</p>
+      <p>保険商品の申込み・契約については、各保険会社の利用規約および特定商取引法に基づく表示に従ってください。</p>
+    </section>
+
+    <section class="section-block">
+      <h2>アフィリエイトに関する表示</h2>
+      <p>当サイトはアフィリエイトプログラムに参加しており、記事内のリンクを経由して保険へのお申込みが完了した場合、当サイトが報酬を受け取ることがあります。</p>
+      <p>報酬の有無によって掲載内容の公正性・中立性は損なわれません。各保険商品の評価は編集部の独自基準に基づいています。</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .page-wrap {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+    max-width: 800px;
+  }
+  .page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: .5rem;
+  }
+  .page-updated {
+    font-size: .85rem;
+    color: var(--color-text-light);
+    margin-bottom: 2.5rem;
+  }
+  .section-block {
+    margin-bottom: 2.5rem;
+  }
+  .section-block h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-left: 4px solid var(--color-primary);
+    padding-left: .75rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+  .section-block p {
+    font-size: .95rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+    margin-bottom: .75rem;
+  }
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .95rem;
+  }
+  .info-table th, .info-table td {
+    border: 1px solid var(--color-border);
+    padding: .75rem 1rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .info-table th {
+    background: #f3f8f5;
+    font-weight: 600;
+    width: 160px;
+    color: var(--color-text);
+  }
+  .info-table a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+</style>

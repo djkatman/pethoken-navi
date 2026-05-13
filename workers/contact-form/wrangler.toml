@@ -1,0 +1,9 @@
+name = "pethoken-contact"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+CONTACT_TO_EMAIL = "djkatman@gmail.com"
+
+# カスタムドメイン設定（デプロイ後にCloudflareダッシュボードで設定）
+# routes = [{ pattern = "contact.pethoken-navi.com/send", zone_name = "pethoken-navi.com" }]
